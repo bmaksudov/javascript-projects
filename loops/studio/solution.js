@@ -2,29 +2,51 @@ const input = require('readline-sync');
 
 // Part A: #1 Populate these arrays
 
-let protein = [];
-let grains = [];
-let veggies = [];
-let beverages = [];
-let desserts = [];
+let protein = ['chicken', 'pork', 'tofu', 'beef', 'fish', 'beans'];
+let grains = ['rice', 'pasta', 'corn', 'potato', 'quinoa', 'crackers'];
+let veggies = ['peas', 'green beans', 'kale', 'edamame', 'broccoli', 'asparagus'];
+let beverages = ['juice', 'milk', 'water', 'soy milk', 'soda', 'tea'];
+let desserts = ['apple', 'banana', 'more kale', 'ice cream', 'chocolate', 'kiwi'];
 
 
-function mealAssembly(protein, grains, veggies, beverages, desserts, numMeals) {
+function mealAssembly(protein = protein, grains = grains, veggies = veggies, beverages = beverages, desserts = desserts, numMeals) {
   let pantry = [protein, grains, veggies, beverages, desserts];
   let meals = [];
   
   /// Part A #2: Write a ``for`` loop inside this function
   /// Code your solution for part A #2 below this comment (and above the return statement) ... ///
 
+  /**
+   [
+    ["chicken","rice","peas","apple"]
+    ["pork","pasta","green beans","milk","banana"]
+   ]
+   */
+  for (let i = 0; i < numMeals ; i++) {
+    let temporaryMeal = [];
+    for (let j = 0; j < pantry.length; j++){
+      temporaryMeal.push(pantry[j][i]);
+
+    }
+    meals.push(temporaryMeal);
+  }
 
   return meals;
 }
+
+console.log(mealAssembly(protein, grains, veggies, beverages, desserts, askForNumber()))
+
+
 
 
 function askForNumber() {
   numMeals = input.question("How many meals would you like to make?");
   
   /// CODE YOUR SOLUTION TO PART B here ///
+
+  while ( numMeals < 1 || isNaN(numMeals)) {
+    numMeals = input.question('Invalid response, please choose between 1-6 meals')
+  }
 
   return numMeals;
 }
